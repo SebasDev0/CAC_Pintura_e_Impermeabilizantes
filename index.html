@@ -56,7 +56,7 @@
       position:relative; overflow:hidden;
     }
     .hero::before { content:''; position:absolute; inset:0; background:url('CAC_HERO_FONDO.png') center/cover no-repeat; opacity:0.1; }
-    .hero::after  { content:''; position:absolute; bottom:-1px; left:0; right:0; height:70px; background:var(--white); clip-path:polygon(0 100%,100% 0,100% 100%); }
+
     .hero-content { position:relative; z-index:1; max-width:820px; }
 
     .hero-logo {
@@ -237,25 +237,132 @@
     .footer-brand { font-family:'Playfair Display',serif; color:var(--yellow); font-size:1.05rem; margin-bottom:8px; }
     footer p { font-size:0.83rem; line-height:1.9; }
 
+    /* ══ BANNER REPSE ══ */
+    .repse-banner {
+      background: var(--yellow);
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      text-align: center;
+    }
+    .repse-icon {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+    .repse-banner p {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--black);
+      line-height: 1.4;
+    }
+    .repse-banner p strong {
+      font-size: 1.1rem;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+    }
+    @media (max-width: 640px) {
+      .repse-banner { padding: 16px 20px; gap: 12px; }
+      .repse-banner p { font-size: 0.9rem; }
+    }
+
     /* ══ ANIMATIONS ══ */
     @keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
     .reveal { opacity:0; transform:translateY(30px); transition:opacity 0.6s ease, transform 0.6s ease; }
     .reveal.visible { opacity:1; transform:none; }
 
     /* ══ RESPONSIVE ══ */
-    @media (max-width: 960px) {
-      header { padding:14px 24px; }
-      #servicios, #galeria, #contacto { padding:70px 24px; }
-      .contacto-inner { grid-template-columns:1fr; gap:50px; }
-      .stat-item { padding:20px 24px; }
+
+    /* Tablet grande / laptop pequeña */
+    @media (max-width: 1100px) {
+      header { padding:14px 32px; }
+      #servicios, #galeria, #contacto { padding:80px 32px; }
+      .contacto-inner { gap:50px; }
+      .stat-item { padding:22px 32px; }
     }
+
+    /* Tablet */
+    @media (max-width: 900px) {
+      header { padding:14px 24px; }
+      #servicios, #galeria, #contacto { padding:64px 24px; }
+
+      /* Stats: 2×2 en tablet */
+      .stats-bar { display:grid; grid-template-columns:1fr 1fr; }
+      .stat-item { border-right:none; border-bottom:1px solid rgba(255,255,255,0.07); padding:20px 16px; }
+      .stat-item:nth-child(1),
+      .stat-item:nth-child(2) { border-bottom:1px solid rgba(255,255,255,0.07); }
+      .stat-item:nth-child(3),
+      .stat-item:nth-child(4) { border-bottom:none; }
+      .stat-item:nth-child(odd) { border-right:1px solid rgba(255,255,255,0.07); }
+
+      /* Contacto: una columna */
+      .contacto-inner { grid-template-columns:1fr; gap:48px; }
+
+      /* Modal: padding reducido */
+      .modal-img-wrap { padding:60px 70px; }
+    }
+
+    /* Móvil grande */
     @media (max-width: 640px) {
+      /* Header */
+      header { padding:12px 16px; }
       nav { display:none; }
       .menu-toggle { display:flex; }
-      .galeria-grid { grid-template-columns:repeat(2,1fr); }
-      .hero-btns { flex-direction:column; align-items:center; }
-      .hero-logo { height:90px; }
+      .logo-area img { height:48px; }
+      .logo-tagline { font-size:0.6rem; letter-spacing:1.5px; }
+
+      /* Hero */
+      .hero { min-height:80vh; padding:60px 16px 80px; }
+      .hero-logo { height:80px; margin-bottom:18px; }
+      .hero-badge { font-size:0.65rem; letter-spacing:2px; padding:6px 16px; margin-bottom:20px; }
+      .hero p { font-size:0.95rem; margin-bottom:28px; }
+      .hero-btns { flex-direction:column; align-items:center; gap:10px; }
+      .btn-primary, .btn-secondary { width:100%; max-width:280px; text-align:center; padding:13px 24px; }
+
+      /* Stats: 2×2 */
+      .stats-bar { grid-template-columns:1fr 1fr; }
+      .stat-num { font-size:1.7rem; }
+      .stat-label { font-size:0.68rem; letter-spacing:1px; }
+
+      /* REPSE banner */
+      .repse-banner { flex-direction:column; gap:8px; padding:16px; }
+      .repse-icon { font-size:1.3rem; }
+      .repse-banner p { font-size:0.9rem; }
+
+      /* Servicios */
+      #servicios { padding:56px 16px; }
+      .servicios-grid { grid-template-columns:1fr; gap:18px; }
+      .servicio-card { padding:26px 22px; }
+
+      /* Galería: 2 columnas */
+      #galeria { padding:56px 16px; }
+      .galeria-grid { grid-template-columns:repeat(2,1fr); gap:8px; }
+
+      /* Modal */
+      .modal-img-wrap { padding:56px 16px 100px; }
+      .modal-contenido { border-radius:6px; }
       .flecha { display:none; }
+      .modal-thumbs { bottom:16px; gap:5px; }
+      .m-thumb { width:36px; height:36px; }
+
+      /* Contacto */
+      #contacto { padding:56px 16px; }
+      .wa-box img { width:120px; height:120px; }
+      .form-head h3 { font-size:1.3rem; }
+      input, textarea, select { font-size:16px; } /* evita zoom en iOS */
+
+      /* Footer */
+      footer { padding:28px 16px; }
+      footer p { font-size:0.78rem; }
+    }
+
+    /* Móvil pequeño */
+    @media (max-width: 380px) {
+      .hero-logo { height:64px; }
+      .galeria-grid { grid-template-columns:1fr 1fr; gap:6px; }
+      .stat-num { font-size:1.5rem; }
+      .btn-primary, .btn-secondary { max-width:100%; }
     }
   </style>
 </head>
@@ -303,6 +410,13 @@
   <div class="stat-item"><span class="stat-num">500+</span><div class="stat-label">Proyectos completados</div></div>
   <div class="stat-item"><span class="stat-num">3</span><div class="stat-label">Sectores atendidos</div></div>
   <div class="stat-item"><span class="stat-num">100%</span><div class="stat-label">Cotizaciones gratuitas</div></div>
+</div>
+
+<!-- ══ BANNER REPSE ══ -->
+<div class="repse-banner reveal">
+  <div class="repse-icon">📋</div>
+  <p>Contamos con todos los documentos requeridos por el SAT, incluyendo <strong>REPSE</strong></p>
+  <div class="repse-icon">✅</div>
 </div>
 
 <!-- ══ SERVICIOS ══ -->
@@ -406,6 +520,19 @@
     <div class="img-wrap"><img src="Imagen28 (20).jpeg" alt="Proyecto 16" loading="lazy"><div class="img-overlay"><span>Ver imagen</span></div></div>
     <div class="img-wrap"><img src="Imagen28 (21).jpeg" alt="Proyecto 17" loading="lazy"><div class="img-overlay"><span>Ver imagen</span></div></div>
     <div class="img-wrap"><img src="Imagen28 (22).jpeg" alt="Proyecto 18" loading="lazy"><div class="img-overlay"><span>Ver imagen</span></div></div>
+    <div class="img-wrap"><img src="nuevo1.jpeg"   alt="Proyecto 1"  loading="lazy"><div class="img-overlay"><span>Ver imagen</span></div></div>
+    <div class="img-wrap"><img src="nuevo2.jpeg"   alt="Proyecto 1"  loading="lazy"><div class="img-overlay"><span>Ver imagen</span></div></div>
+    <div class="img-wrap"><img src="nuevo3.jpeg"   alt="Proyecto 1"  loading="lazy"><div class="img-overlay"><span>Ver imagen</span></div></div>
+    <div class="img-wrap"><img src="nuevo4.jpeg"   alt="Proyecto 1"  loading="lazy"><div class="img-overlay"><span>Ver imagen</span></div></div>
+    <div class="img-wrap"><img src="nuevo5.jpeg"   alt="Proyecto 1"  loading="lazy"><div class="img-overlay"><span>Ver imagen</span></div></div>
+    <div class="img-wrap"><img src="nuevo6.jpeg"   alt="Proyecto 1"  loading="lazy"><div class="img-overlay"><span>Ver imagen</span></div></div>
+    <div class="img-wrap"><img src="nuevo7.jpeg"   alt="Proyecto 1"  loading="lazy"><div class="img-overlay"><span>Ver imagen</span></div></div>
+    <div class="img-wrap"><img src="nuevo8.jpeg"   alt="Proyecto 1"  loading="lazy"><div class="img-overlay"><span>Ver imagen</span></div></div>
+    <div class="img-wrap"><img src="nuevo9.jpeg"   alt="Proyecto 1"  loading="lazy"><div class="img-overlay"><span>Ver imagen</span></div></div>
+    <div class="img-wrap"><img src="nuevo10.jpeg"   alt="Proyecto 1"  loading="lazy"><div class="img-overlay"><span>Ver imagen</span></div></div>
+    <div class="img-wrap"><img src="nuevo11.jpeg"   alt="Proyecto 1"  loading="lazy"><div class="img-overlay"><span>Ver imagen</span></div></div>
+    <div class="img-wrap"><img src="nuevo12.jpeg"   alt="Proyecto 1"  loading="lazy"><div class="img-overlay"><span>Ver imagen</span></div></div>
+
   </div>
 </section>
 
